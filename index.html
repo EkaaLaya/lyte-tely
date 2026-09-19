@@ -1,1 +1,778 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LYTE® — Studio Design & Fashion | Jakarta Selatan</title>
+<meta name="description" content="Lyte Original — studio design & fashion di Jakarta Selatan. By appointment only. You need? Call me brother.">
 
+<!-- FONT: Anton (display), Instrument Serif (aksen italic), Space Grotesk (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   [EDIT] UBAH WARNA TEMA DI SINI
+═══════════════════════════════════════════ */
+:root{
+  --bg:#EFEAE0;          /* latar krem */
+  --ink:#121110;         /* hitam pekat */
+  --accent:#C9F227;      /* aksen acid lime */
+  --line:rgba(18,17,16,.16);
+  --mut:rgba(18,17,16,.55);
+  --cream:#EFEAE0;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:'Space Grotesk',sans-serif;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--accent);color:var(--ink)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;background:none;border:none;color:inherit}
+section{scroll-margin-top:90px}
+
+/* film grain halus */
+body::after{
+  content:'';position:fixed;inset:0;z-index:2000;pointer-events:none;opacity:.05;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.wrap{width:min(1520px,92vw);margin:0 auto}
+.serif{font-family:'Instrument Serif',serif;font-style:italic}
+.kicker{
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  font-weight:600;color:var(--mut);display:flex;align-items:center;gap:.8rem;
+}
+.kicker::before{content:'';width:34px;height:1px;background:var(--ink)}
+h1,h2,h3,.display{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;line-height:.85}
+
+/* gambar dummy: monokrom, berwarna saat hover */
+.ph{filter:grayscale(1) contrast(1.05);transition:filter .6s var(--ease),transform .8s var(--ease)}
+
+/* ── CURSOR ── */
+@media (pointer:fine){ body, a, button, input, select, textarea, label{cursor:none} }
+.cursor{
+  position:fixed;top:0;left:0;width:10px;height:10px;border-radius:50%;
+  background:var(--ink);z-index:3000;pointer-events:none;
+  display:flex;align-items:center;justify-content:center;
+  transition:width .35s var(--ease),height .35s var(--ease),background .35s;
+}
+.cursor span{font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--ink);opacity:0;transition:opacity .2s}
+.cursor.big{width:76px;height:76px;background:var(--accent)}
+.cursor.big span{opacity:1}
+@media (pointer:coarse){.cursor{display:none}}
+
+/* ── PRELOADER ── */
+#loader{
+  position:fixed;inset:0;z-index:4000;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .9s var(--ease);
+}
+#loader.hide{transform:translateY(-101%)}
+#loader .ld-word{font-family:'Anton';font-size:clamp(4rem,14vw,11rem);overflow:hidden}
+#loader .ld-word b{display:inline-block;font-weight:400;animation:ldup .9s var(--ease) both}
+@keyframes ldup{from{transform:translateY(110%)}to{transform:translateY(0)}}
+#ld-num{position:absolute;bottom:2rem;right:2.4rem;font-family:'Anton';font-size:1.4rem;letter-spacing:.05em}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 4vw;transition:background .4s,border-color .4s,backdrop-filter .4s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{background:rgba(239,234,224,.85);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+.logo{font-family:'Anton';font-size:1.35rem;letter-spacing:.02em}
+.logo sup{font-size:.55em;color:var(--mut)}
+.nav-links{display:flex;gap:2.4rem;list-style:none}
+.nav-links a{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;position:relative}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:1.5px;background:var(--accent);transition:width .35s var(--ease)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:.5rem;background:var(--ink);color:var(--cream);
+  padding:.65rem 1.2rem;border-radius:999px;font-size:.74rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;transition:background .3s,color .3s;
+}
+.nav-cta:hover{background:var(--accent);color:var(--ink)}
+.nav-cta svg{width:14px;height:14px}
+.burger{display:none;flex-direction:column;gap:6px;padding:.6rem;z-index:1100}
+.burger i{display:block;width:26px;height:2px;background:var(--ink);transition:.4s var(--ease)}
+body.menu-open .burger i:nth-child(1){transform:translateY(4px) rotate(45deg);background:var(--cream)}
+body.menu-open .burger i:nth-child(2){transform:translateY(-4px) rotate(-45deg);background:var(--cream)}
+
+/* menu mobile fullscreen */
+.menu{
+  position:fixed;inset:0;z-index:1000;background:var(--ink);color:var(--cream);
+  display:flex;flex-direction:column;justify-content:center;padding:0 8vw;
+  transform:translateY(-102%);transition:transform .7s var(--ease);
+}
+body.menu-open .menu{transform:translateY(0)}
+body.menu-open{overflow:hidden}
+.menu a{
+  font-family:'Anton';font-size:clamp(3rem,13vw,6rem);text-transform:uppercase;
+  line-height:1.05;display:flex;align-items:baseline;gap:1rem;
+  opacity:0;transform:translateY(30px);transition:.6s var(--ease);
+}
+.menu a em{font-family:'Instrument Serif';font-style:italic;font-size:.35em;color:var(--accent)}
+.menu a:hover{color:var(--accent)}
+body.menu-open .menu a{opacity:1;transform:none}
+body.menu-open .menu a:nth-child(2){transition-delay:.08s}
+body.menu-open .menu a:nth-child(3){transition-delay:.16s}
+body.menu-open .menu a:nth-child(4){transition-delay:.24s}
+body.menu-open .menu a:nth-child(5){transition-delay:.32s}
+
+/* ── HERO ── */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:110px 0 3.5rem;position:relative}
+.hero-meta{display:flex;justify-content:space-between;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--mut);margin-bottom:auto;padding-top:1rem}
+.hero-photo{
+  position:absolute;top:13%;right:4vw;width:min(30vw,400px);aspect-ratio:3/4;
+  overflow:hidden;z-index:1;
+}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.hero-word{position:relative;z-index:2;font-size:clamp(6rem,23vw,25rem);margin-top:2rem}
+.hero-word .lw-mask{display:inline-block;overflow:hidden;vertical-align:bottom}
+.hero-word .lw{display:inline-block;transform:translateY(115%);transition:transform 1.1s var(--ease) calc(var(--i)*.07s + .15s)}
+body.ready .hero-word .lw{transform:translateY(0)}
+.hero-word .lw:hover{color:transparent;-webkit-text-stroke:2.5px var(--ink)}
+.hero-sub{
+  position:relative;z-index:2;text-align:right;
+  font-size:clamp(3rem,12.5vw,14rem);color:transparent;
+  -webkit-text-stroke:2px var(--ink);line-height:.9;letter-spacing:.01em;
+}
+.badge{position:absolute;z-index:3;right:min(9vw,150px);top:34%;width:170px;height:170px}
+.badge svg{width:100%;height:100%;animation:spin 14s linear infinite}
+.badge text{font-family:'Space Grotesk';font-weight:700;font-size:13px;letter-spacing:2px;fill:var(--ink)}
+.badge .core{
+  position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;
+  background:var(--accent);display:flex;align-items:center;justify-content:center;
+}
+.badge .core svg{width:26px;height:26px;animation:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-top:3rem;flex-wrap:wrap}
+.tagline{font-size:clamp(1.6rem,3.4vw,2.8rem);line-height:1.1}
+.tagline .crown{display:inline-flex;width:1em;height:1em;vertical-align:-.12em;color:var(--ink)}
+.tagline .crown svg{width:100%;height:100%}
+.status{display:inline-flex;align-items:center;gap:.55rem;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem}
+.status i{width:9px;height:9px;border-radius:50%;background:var(--accent);border:1.5px solid var(--ink);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{transform:scale(1.5)}}
+.cta-row{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;padding:1.05rem 1.7rem;border-radius:999px;
+  background:var(--ink);color:var(--cream);border:1px solid var(--ink);
+  font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:.35s var(--ease);
+}
+.btn svg{width:15px;height:15px;transition:transform .35s var(--ease)}
+.btn:hover{background:var(--accent);color:var(--ink)}
+.btn:hover svg{transform:translate(2px,-2px)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--cream)}
+
+[data-hero-fade]{opacity:0;transform:translateY(20px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+body.ready [data-hero-fade]{opacity:1;transform:none}
+body.ready [data-hero-fade="1"]{transition-delay:.5s}
+body.ready [data-hero-fade="2"]{transition-delay:.65s}
+body.ready [data-hero-fade="3"]{transition-delay:.8s}
+
+/* ── MARQUEE ── */
+.mq-wrap{transform:rotate(-2deg);width:104vw;margin:4.5rem -2vw;background:var(--ink);padding:1rem 0;overflow:hidden}
+.mq-track{display:flex;width:max-content;gap:2.6rem;animation:mq 24s linear infinite}
+.mq-group{display:flex;align-items:center;gap:2.6rem}
+.mq-group span{font-family:'Anton';font-size:1.5rem;letter-spacing:.06em;color:var(--accent);white-space:nowrap}
+.mq-group svg{width:18px;height:18px;color:var(--accent);flex-shrink:0}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ── SECTIONS umum ── */
+.sec{padding:clamp(5rem,9vw,8.5rem) 0}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3.5rem;gap:1rem;flex-wrap:wrap}
+.sec-title{font-size:clamp(2.6rem,7vw,6rem)}
+.sec-title em{font-family:'Instrument Serif';font-style:italic;text-transform:none;letter-spacing:0}
+
+/* reveal on scroll */
+[data-reveal]{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+[data-reveal].in{opacity:1;transform:none}
+
+/* ── TENTANG ── */
+.about-grid{display:grid;grid-template-columns:280px 1fr;gap:3rem}
+.about-lead{font-size:clamp(1.5rem,3vw,2.6rem);line-height:1.25;font-weight:500;max-width:20ch;max-width:24ch}
+.about-lead em{font-family:'Instrument Serif';font-style:italic;color:transparent;-webkit-text-stroke:1.2px var(--ink)}
+.about-body{margin-top:2rem;color:var(--mut);max-width:56ch;line-height:1.75;font-size:1rem}
+.stats{margin-top:4.5rem;border-top:1px solid var(--ink)}
+.stat{display:flex;align-items:baseline;gap:2rem;padding:1.6rem 0;border-bottom:1px solid var(--line)}
+.stat b{font-family:'Anton';font-weight:400;font-size:clamp(2rem,4.5vw,3.6rem);min-width:180px}
+.stat span{color:var(--mut);font-size:.9rem;letter-spacing:.05em}
+
+/* ── LAYANAN ── */
+.svc-list{border-top:1px solid var(--ink)}
+.svc-row{
+  display:grid;grid-template-columns:90px 1.1fr 1fr 60px;align-items:center;gap:2rem;
+  padding:2.3rem 1.2rem;border-bottom:1px solid var(--line);
+  transition:background .4s var(--ease),color .4s var(--ease);position:relative;
+}
+.svc-row .idx{font-size:.8rem;font-weight:600;letter-spacing:.2em;color:var(--mut)}
+.svc-row h3{font-size:clamp(1.6rem,3.6vw,3rem)}
+.svc-row p{color:var(--mut);font-size:.92rem;line-height:1.6;transition:color .4s}
+.svc-row .arr{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.4s var(--ease)}
+.svc-row .arr svg{width:17px;height:17px;transition:transform .4s var(--ease)}
+.svc-row:hover{background:var(--ink);color:var(--cream)}
+.svc-row:hover .idx{color:var(--accent)}
+.svc-row:hover p{color:rgba(239,234,224,.65)}
+.svc-row:hover .arr{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.svc-row:hover .arr svg{transform:rotate(45deg)}
+.svc-preview{
+  position:fixed;top:0;left:0;width:280px;aspect-ratio:3/4;z-index:800;pointer-events:none;
+  overflow:hidden;opacity:0;scale:.85;transition:opacity .35s var(--ease),scale .35s var(--ease);
+}
+.svc-preview.on{opacity:1;scale:1}
+.svc-preview img{width:100%;height:100%;object-fit:cover}
+@media (pointer:coarse){.svc-preview{display:none}}
+
+/* ── KOLEKSI ── */
+.look-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:1.4rem}
+.look-item{display:block}
+.look-item .frame{overflow:hidden;position:relative;background:var(--bg2)}
+.look-item img{width:100%;height:100%;object-fit:cover}
+.look-item:hover img{filter:grayscale(0) contrast(1);transform:scale(1.045)}
+.look-item .frame::after{
+  content:'';position:absolute;inset:0;border:1px solid transparent;transition:.4s;
+}
+.look-item:hover .frame::after{border-color:var(--ink)}
+.look-cap{display:flex;justify-content:space-between;align-items:baseline;padding-top:.85rem}
+.look-cap b{font-family:'Anton';font-weight:400;font-size:1.05rem;letter-spacing:.03em;text-transform:uppercase}
+.look-cap b i{font-style:normal;color:var(--mut);margin-right:.7rem;font-size:.8em}
+.look-cap span{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.lk1{grid-column:1/7;aspect-ratio:4/5}
+.lk2{grid-column:8/13;aspect-ratio:4/3;margin-top:18%}
+.lk3{grid-column:1/5;aspect-ratio:3/4;margin-top:-6%}
+.lk4{grid-column:6/11;aspect-ratio:16/10;margin-top:8%}
+.lk5{grid-column:3/13;aspect-ratio:16/8;margin-top:4%}
+
+/* ── KUNJUNGI ── */
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.visit-block{border-top:1px solid var(--ink);padding-top:1.2rem;margin-top:2.2rem}
+.visit-block:first-child{margin-top:0}
+.visit-block h4{font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--mut);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
+.visit-block h4 svg{width:14px;height:14px}
+.visit-block p, .visit-block a{font-size:1.05rem;line-height:1.6;font-weight:500}
+.visit-block a{border-bottom:1.5px solid var(--accent);transition:background .25s}
+.visit-block a:hover{background:var(--accent)}
+.hours{display:grid;grid-template-columns:1fr 1fr;gap:0 2rem}
+.hours div{display:flex;justify-content:space-between;padding:.55rem 0;border-bottom:1px dashed var(--line);font-size:.88rem}
+.hours div span:last-child{color:var(--mut)}
+
+.appt{border:1px solid var(--ink);padding:2.6rem;background:#F4EFE5}
+.appt h3{font-size:clamp(1.8rem,3vw,2.6rem);margin-bottom:.4rem}
+.appt>.sub{color:var(--mut);font-size:.9rem;margin-bottom:2.2rem;line-height:1.6}
+.field{margin-bottom:1.6rem}
+.field label{display:block;font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);margin-bottom:.5rem}
+.field input,.field select,.field textarea{
+  width:100%;background:transparent;border:none;border-bottom:1.5px solid var(--line);
+  padding:.7rem 0;font-family:inherit;font-size:1rem;color:var(--ink);outline:none;
+  transition:border-color .3s;border-radius:0;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-bottom-color:var(--ink)}
+.field input.err{border-bottom-color:#D64B2A}
+.field textarea{resize:vertical;min-height:70px}
+.appt .btn{width:100%;justify-content:center;margin-top:.6rem}
+.field-note{font-size:.74rem;color:var(--mut);margin-top:.9rem;display:flex;align-items:center;gap:.45rem}
+.field-note svg{width:13px;height:13px;flex-shrink:0}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:var(--cream);padding:clamp(5rem,9vw,8rem) 0 2rem;margin-top:4rem}
+.f-word{font-size:clamp(3.4rem,12vw,13rem);line-height:.9}
+.f-word .out{color:transparent;-webkit-text-stroke:2px var(--cream)}
+.f-word .fill{color:var(--accent);display:inline-flex;align-items:center;gap:.15em}
+.f-word .fill svg{width:.55em;height:.55em}
+.f-cta{
+  margin-top:3.5rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;
+  background:var(--accent);color:var(--ink);padding:1.6rem 2rem;border-radius:14px;
+  font-family:'Anton';font-size:clamp(1.2rem,3.4vw,2.4rem);text-transform:uppercase;
+  transition:.35s var(--ease);
+}
+.f-cta:hover{background:var(--cream)}
+.f-cta svg{width:1em;height:1em;flex-shrink:0}
+.f-bottom{
+  margin-top:4rem;padding-top:1.6rem;border-top:1px solid rgba(239,234,224,.18);
+  display:flex;justify-content:space-between;gap:1.2rem;flex-wrap:wrap;
+  font-size:.78rem;letter-spacing:.06em;color:rgba(239,234,224,.6);
+}
+.f-bottom a{color:var(--cream);border-bottom:1px solid var(--accent)}
+.f-bottom a:hover{color:var(--accent)}
+.f-note{font-size:.7rem;color:rgba(239,234,224,.35);margin-top:1rem}
+
+/* ── TOAST ── */
+#toasts{position:fixed;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:5000;display:flex;flex-direction:column;gap:.6rem;align-items:center}
+.toast{
+  display:flex;align-items:center;gap:.6rem;background:var(--ink);color:var(--cream);
+  padding:.85rem 1.4rem;border-radius:999px;font-size:.82rem;font-weight:600;letter-spacing:.04em;
+  border:1.5px solid var(--accent);opacity:0;transform:translateY(16px);transition:.4s var(--ease);
+}
+.toast.show{opacity:1;transform:none}
+.toast svg{width:15px;height:15px;color:var(--accent)}
+
+/* ── RESPONSIVE ── */
+@media (max-width:960px){
+  .nav-links,.nav-cta{display:none}
+  .burger{display:flex}
+  .hero-photo{width:min(48vw,300px);top:16%}
+  .badge{display:none}
+  .about-grid,.visit-grid{grid-template-columns:1fr}
+  .svc-row{grid-template-columns:50px 1fr 44px;gap:1rem}
+  .svc-row p{display:none}
+  .svc-row .arr{width:38px;height:38px}
+  .look-grid{grid-template-columns:1fr;gap:2.4rem}
+  .lk1,.lk2,.lk3,.lk4,.lk5{grid-column:1/-1;margin-top:0;aspect-ratio:4/3}
+  .hours{grid-template-columns:1fr}
+  .hero-bottom{flex-direction:column;align-items:flex-start}
+  .hero-sub{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ PRELOADER ══════════ -->
+<div id="loader">
+  <div class="ld-word"><b style="animation-delay:.05s">L</b><b style="animation-delay:.12s">Y</b><b style="animation-delay:.19s">T</b><b style="animation-delay:.26s">E</b><b style="animation-delay:.33s;color:transparent;-webkit-text-stroke:2px var(--ink)">®</b></div>
+  <div id="ld-num">000</div>
+</div>
+
+<!-- cursor custom -->
+<div class="cursor" id="cursor"><span></span></div>
+
+<!-- preview gambar saat hover layanan -->
+<div class="svc-preview" id="svc-preview"><img src="" alt=""></div>
+
+<div id="toasts"></div>
+
+<!-- ══════════ NAVIGASI ══════════ -->
+<nav id="nav">
+  <!-- [EDIT] Nama brand di nav -->
+  <a href="#" class="logo">LYTE<sup>®</sup></a>
+  <ul class="nav-links">
+    <li><a href="#tentang">Tentang</a></li>
+    <li><a href="#layanan">Layanan</a></li>
+    <li><a href="#koleksi">Koleksi</a></li>
+    <li><a href="#kunjungi">Kunjungi</a></li>
+  </ul>
+  <!-- [EDIT] Ganti nomor WhatsApp di link bawah ini (format: 62xxx tanpa +) -->
+  <a class="nav-cta" href="https://wa.me/6288988714270?text=Halo%20Lyte!%20Saya%20mau%20tanya-tanya." target="_blank" rel="noopener">
+    <i data-lucide="message-circle"></i> WhatsApp
+  </a>
+  <button class="burger" id="burger" aria-label="Menu"><i></i><i></i></button>
+</nav>
+
+<!-- menu mobile -->
+<div class="menu" id="menu">
+  <a href="#tentang"><em>01</em> Tentang</a>
+  <a href="#layanan"><em>02</em> Layanan</a>
+  <a href="#koleksi"><em>03</em> Koleksi</a>
+  <a href="#kunjungi"><em>04</em> Kunjungi</a>
+  <a href="https://wa.me/6288988714270" target="_blank" rel="noopener"><em>05</em> WhatsApp</a>
+</div>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero wrap">
+  <div class="hero-meta" data-hero-fade="1">
+    <span>Studio Design &amp; Fashion</span>
+    <span>Melawai — Jakarta Selatan</span>
+  </div>
+
+  <!-- [EDIT] Ganti foto hero: ubah URL img di bawah (pakai foto produk/sendiki sendiri) -->
+  <div class="hero-photo" data-cursor="LYTE" data-hero-fade="1">
+    <img class="ph" src="https://picsum.photos/seed/lyte-hero/900/1200.jpg" alt="Foto Lyte">
+  </div>
+
+  <!-- stempel berputar -->
+  <div class="badge" data-hero-fade="2">
+    <svg viewBox="0 0 200 200" aria-hidden="true">
+      <defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+      <text><textPath href="#circ" textLength="488" lengthAdjust="spacingAndGlyphs">BY APPOINTMENT ONLY • JAKARTA SELATAN • ORIGINAL •</textPath></text>
+    </svg>
+    <div class="core"><i data-lucide="crown"></i></div>
+  </div>
+
+  <!-- [EDIT] Kata-kata besar hero -->
+  <h1 class="hero-word" aria-label="LYTE">
+    <span class="lw-mask"><span class="lw" style="--i:0">L</span></span><span class="lw-mask"><span class="lw" style="--i:1">Y</span></span><span class="lw-mask"><span class="lw" style="--i:2">T</span></span><span class="lw-mask"><span class="lw" style="--i:3">E</span></span><span class="lw-mask"><span class="lw" style="--i:4;color:transparent;-webkit-text-stroke:2.5px var(--ink)">®</span></span>
+  </h1>
+  <div class="hero-sub" data-hero-fade="2">Original</div>
+
+  <div class="hero-bottom">
+    <div data-hero-fade="3">
+      <div class="status"><i></i> Open — By Appointment</div>
+      <!-- [EDIT] Tagline -->
+      <p class="tagline serif">You need? <em>call me brother</em> <span class="crown"><i data-lucide="crown"></i></span></p>
+    </div>
+    <div class="cta-row" data-hero-fade="3">
+      <a class="btn" href="https://wa.me/6288988714270?text=Halo%20Lyte!" target="_blank" rel="noopener">
+        <i data-lucide="message-circle"></i> Chat WhatsApp
+      </a>
+      <a class="btn ghost" href="#koleksi">
+        Lihat Koleksi <i data-lucide="arrow-down"></i>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════ MARQUEE ══════════ -->
+<div class="mq-wrap" aria-hidden="true">
+  <div class="mq-track">
+    <div class="mq-group">
+      <span>Design &amp; Fashion</span><i data-lucide="asterisk"></i>
+      <span>100% Original</span><i data-lucide="asterisk"></i>
+      <span>Jakarta Selatan</span><i data-lucide="asterisk"></i>
+      <span>By Appointment</span><i data-lucide="asterisk"></i>
+    </div>
+    <div class="mq-group">
+      <span>Design &amp; Fashion</span><i data-lucide="asterisk"></i>
+      <span>100% Original</span><i data-lucide="asterisk"></i>
+      <span>Jakarta Selatan</span><i data-lucide="asterisk"></i>
+      <span>By Appointment</span><i data-lucide="asterisk"></i>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ TENTANG ══════════ -->
+<section class="sec" id="tentang">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="kicker" data-reveal>01 — Tentang</div>
+      <div>
+        <!-- [EDIT] Teks perkenalan -->
+        <p class="about-lead" data-reveal>
+          Lyte adalah studio <em>design &amp; fashion</em> di Jakarta Selatan.
+          Setiap karya dibuat orisinal — dipikirkan matang, dikerjakan satu-satu,
+          tanpa templating.
+        </p>
+        <!-- [EDIT] Paragraf deskripsi -->
+        <p class="about-body" data-reveal>
+          Kami percaya fashion bukan sekadar produk, tapi cara bicara. Karena itu semuanya
+          dikerjakan lewat sesi privat: kamu cerita, kami terjemahkan jadi bentuk. Dari custom
+          apparel, Merch, sampai identitas visual — semua lahir dari obrolan, bukan katalog.
+          Buka dengan appointment saja, biar setiap klien dapat fokus penuh.
+        </p>
+      </div>
+    </div>
+
+    <!-- [EDIT] Angka-statistik (bebas diubah) -->
+    <div class="stats" data-reveal>
+      <div class="stat"><b>100%</b><span>Original &amp; dikerjakan manual, satu per satu</span></div>
+      <div class="stat"><b>1-on-1</b><span>Konsultasi privat untuk setiap proyek</span></div>
+      <div class="stat"><b>7 Hari</b><span>Buka setiap hari, selalu dengan appointment</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ LAYANAN ══════════ -->
+<section class="sec" id="layanan" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <h2 class="sec-title">Apa yang <em>kami</em> kerjakan</h2>
+      <span class="kicker" style="align-self:center">02 — Layanan</span>
+    </div>
+
+    <!-- [EDIT] Daftar layanan: ubah judul, deskripsi, gambar (data-img), dan pesan WhatsApp (data-wa) -->
+    <div class="svc-list" data-reveal>
+
+      <a class="svc-row" href="https://wa.me/6288988714270?text=Halo%20Lyte!%20Saya%20tertarik%20dengan%20Custom%20Design." target="_blank" rel="noopener"
+         data-img="https://picsum.photos/seed/lyte-s1/640/800.jpg" data-cursor="BOOK">
+        <span class="idx">/ 01</span>
+        <h3>Custom Design</h3>
+        <p>Desain eksklusif dari sketsa sampai jadi — pakaian yang tidak akan dimiliki orang lain.</p>
+        <span class="arr"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+
+      <a class="svc-row" href="https://wa.me/6288988714270?text=Halo%20Lyte!%20Saya%20mau%20pesan%20Apparel%20%2F%20Merch." target="_blank" rel="noopener"
+         data-img="https://picsum.photos/seed/lyte-s2/640/800.jpg" data-cursor="BOOK">
+        <span class="idx">/ 02</span>
+        <h3>Apparel &amp; Merch</h3>
+        <p>Kaos, jaket, crewneck, hingga merchandise — untuk personal maupun komunitas.</p>
+        <span class="arr"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+
+      <a class="svc-row" href="https://wa.me/6288988714270?text=Halo%20Lyte!%20Saya%20butuh%20jasa%20Branding%20%26%20Visual." target="_blank" rel="noopener"
+         data-img="https://picsum.photos/seed/lyte-s3/640/800.jpg" data-cursor="BOOK">
+        <span class="idx">/ 03</span>
+        <h3>Branding &amp; Visual</h3>
+        <p>Logo, identitas, dan materi visual untuk brand kamu — dibuat dari nol, khas karaktermu.</p>
+        <span class="arr"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+
+      <a class="svc-row" href="https://wa.me/6288988714270?text=Halo%20Lyte!%20Saya%20mau%20jadwal%20Styling%20%2F%20Konsultasi." target="_blank" rel="noopener"
+         data-img="https://picsum.photos/seed/lyte-s4/640/800.jpg" data-cursor="BOOK">
+        <span class="idx">/ 04</span>
+        <h3>Styling &amp; Konsultasi</h3>
+        <p>Sesi privat: diskusi konsep, pemilihan gaya, dan arahan visual sebelum produksi.</p>
+        <span class="arr"><i data-lucide="arrow-up-right"></i></span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ KOLEKSI ══════════ -->
+<section class="sec" id="koleksi" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <h2 class="sec-title">Koleksi <em>terpilih</em></h2>
+      <span class="kicker" style="align-self:center">03 — Lookbook</span>
+    </div>
+
+    <!-- [EDIT] Ganti semua gambar & nama item. Klik item langsung buka WhatsApp tanya produk. -->
+    <div class="look-grid">
+      <a class="look-item lk1" data-reveal href="https://wa.me/6288988714270?text=Halo%20Lyte!%20Saya%20tertarik%20dengan%20item%20001." target="_blank" rel="noopener" data-cursor="LIHAT">
+        <div class="frame"><img class="ph" src="https://picsum.photos/seed/lyte-a/900/1150.jpg" alt="Item 001" loading="lazy"></div>
+        <div class="look-cap"><b><i>001</i>Jacket Prototype</b><span>Outerwear</span></div>
+      </a>
+      <a class="look-item lk2" data-reveal href="https://wa.me/6288988714270?text=Halo%20Lyte!%20Saya%20tertarik%20dengan%20item%20002." target="_blank" rel="noopener" data-cursor="LIHAT">
+        <div class="frame"><img class="ph" src="https://picsum.photos/seed/lyte-b/1000/750.jpg" alt="Item 002" loading="lazy"></div>
+        <div class="look-cap"><b><i>002</i>Heavy Tee “Melawai”</b><span>T-shirt</span></div>
+      </a>
+      <a class="look-item lk3" data-reveal href="https://wa.me/6288988714270?text=Halo%20Lyte!%20Saya%20tertarik%20dengan%20item%20003." target="_blank" rel="noopener" data-cursor="LIHAT">
+        <div class="frame"><img class="ph" src="https://picsum.photos/seed/lyte-c/800/1050.jpg" alt="Item 003" loading="lazy"></div>
+        <div class="look-cap"><b><i>003</i>Tote Original</b><span>Goods</span></div>
+      </a>
+      <a class="look-item lk4" data-reveal href="https://wa.me/6288988714270?text=Halo%20Lyte!%20Saya%20tertarik%20dengan%20item%20004." target="_blank" rel="noopener" data-cursor="LIHAT">
+        <div class="frame"><img class="ph" src="https://picsum.photos/seed/lyte-d/1100/700.jpg" alt="Item 004" loading="lazy"></div>
+        <div class="look-cap"><b><i>004</i>Cap Studio</b><span>Headwear</span></div>
+      </a>
+      <a class="look-item lk5" data-reveal href="https://wa.me/6288988714270?text=Halo%20Lyte!%20Boleh%20lihat%20lookbook%20terbaru?" target="_blank" rel="noopener" data-cursor="LIHAT">
+        <div class="frame"><img class="ph" src="https://picsum.photos/seed/lyte-e/1400/760.jpg" alt="Item 005" loading="lazy"></div>
+        <div class="look-cap"><b><i>005</i>Lookbook Campaign</b><span>Editorial</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ KUNJUNGI + APPOINTMENT ══════════ -->
+<section class="sec" id="kunjungi" style="padding-top:0">
+  <div class="wrap visit-grid">
+    <div>
+      <div class="kicker" data-reveal>04 — Kunjungi</div>
+
+      <!-- [EDIT] Alamat & kontak -->
+      <div class="visit-block" data-reveal>
+        <h4><i data-lucide="map-pin"></i> Alamat Studio</h4>
+        <p>Jl. Melawai 5, RT.3/RW.1, Melawai,<br>Kec. Kby. Baru, Kota Jakarta Selatan,<br>DKI Jakarta 12160</p>
+        <p style="margin-top:.8rem">
+          <a href="https://www.google.com/maps/search/?api=1&query=Jl.%20Melawai%205%20RT.3%2FRW.1%20Melawai%20Kebayoran%20Baru%20Jakarta%20Selatan" target="_blank" rel="noopener">Buka di Google Maps</a>
+        </p>
+      </div>
+
+      <div class="visit-block" data-reveal>
+        <h4><i data-lucide="clock"></i> Jam Operasional</h4>
+        <div class="hours">
+          <div><span>Senin</span><span>By appointment</span></div>
+          <div><span>Selasa</span><span>By appointment</span></div>
+          <div><span>Rabu</span><span>By appointment</span></div>
+          <div><span>Kamis</span><span>By appointment</span></div>
+          <div><span>Jumat</span><span>By appointment</span></div>
+          <div><span>Sabtu</span><span>By appointment</span></div>
+          <div><span>Minggu</span><span>By appointment</span></div>
+        </div>
+      </div>
+
+      <div class="visit-block" data-reveal>
+        <h4><i data-lucide="phone"></i> Kontak</h4>
+        <p>
+          <button class="copy" data-copy="+62 889-8871-4270" style="font:inherit;border-bottom:1.5px solid var(--accent);display:inline-flex;align-items:center;gap:.4rem">
+            +62 889-8871-4270 <i data-lucide="copy" style="width:14px;height:14px"></i>
+          </button><br>
+          <a href="mailto:margodah15@gmail.com">margodah15@gmail.com</a><br>
+          <a href="https://instagram.com/margodah07_" target="_blank" rel="noopener">@margodah07_</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Form appointment → langsung compose pesan WhatsApp -->
+    <form class="appt" id="appt-form" data-reveal novalidate>
+      <h3>Book <em class="serif" style="text-transform:none">appointment</em></h3>
+      <p class="sub">Isi form di bawah — pesan otomatis tersusun dan langsung terkirim ke WhatsApp kami.</p>
+
+      <div class="field">
+        <label for="f-nama">Nama</label>
+        <input type="text" id="f-nama" placeholder="Nama kamu" autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="f-layanan">Kebutuhan</label>
+        <select id="f-layanan">
+          <option>Custom Design</option>
+          <option>Apparel / Merch</option>
+          <option>Branding &amp; Visual</option>
+          <option>Styling / Konsultasi</option>
+          <option>Lainnya</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-tgl">Tanggal Appointment</label>
+        <input type="date" id="f-tgl">
+      </div>
+      <div class="field">
+        <label for="f-pesan">Catatan (opsional)</label>
+        <textarea id="f-pesan" placeholder="Ceritakan singkat kebutuhanmu…"></textarea>
+      </div>
+
+      <button type="submit" class="btn"><i data-lucide="send"></i> Kirim via WhatsApp</button>
+      <p class="field-note"><i data-lucide="shield-check"></i> Pesan dibuka di WhatsApp kamu — tidak ada data yang disimpan di web ini.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer id="kontak">
+  <div class="wrap">
+    <h2 class="f-word" data-reveal>
+      <span class="out">You need?</span><br>
+      <span class="fill">Call me brother <i data-lucide="crown"></i></span>
+    </h2>
+
+    <!-- [EDIT] Nomor WhatsApp di tombol & link -->
+    <a class="f-cta" data-reveal href="https://wa.me/6288988714270?text=Halo%20Lyte!" target="_blank" rel="noopener" data-cursor="CHAT">
+      <span>Chat WhatsApp</span>
+      <span style="display:flex;align-items:center;gap:1rem">
+        +62 889-8871-4270 <i data-lucide="arrow-up-right"></i>
+      </span>
+    </a>
+
+    <div class="f-bottom">
+      <!-- [EDIT] Info bawah footer -->
+      <span>Instagram — <a href="https://instagram.com/margodah07_" target="_blank" rel="noopener">@margodah07_</a></span>
+      <span>Email — <a href="mailto:margodah15@gmail.com">margodah15@gmail.com</a></span>
+      <span>Melawai, Jakarta Selatan</span>
+      <span>© 2025 LYTE® — All rights reserved</span>
+    </div>
+    <p class="f-note">Website dummy — silakan edit langsung di file ini. Semua bagian yang bisa diubah sudah ditandai komentar [EDIT].</p>
+  </div>
+</footer>
+
+<!-- Icon library -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+<script>
+lucide.createIcons();
+
+const $  = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const fine = matchMedia('(pointer:fine)').matches;
+
+/* ── PRELOADER: hitung 0 → 100 lalu buka tirai ── */
+(function(){
+  const num = $('#ld-num'), loader = $('#loader');
+  let n = 0;
+  const t = setInterval(() => {
+    n = Math.min(100, n + Math.ceil(Math.random() * 9));
+    num.textContent = String(n).padStart(3, '0');
+    if (n >= 100){ clearInterval(t); setTimeout(done, 300); }
+  }, 38);
+  function done(){
+    loader.classList.add('hide');
+    document.body.classList.add('ready');   // memicu animasi huruf hero
+    setTimeout(() => loader.remove(), 1000);
+  }
+})();
+
+/* ── NAV: bayangan saat scroll ── */
+const nav = $('#nav');
+addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), {passive:true});
+
+/* ── MENU MOBILE ── */
+ $('#burger').addEventListener('click', () => document.body.classList.toggle('menu-open'));
+ $$('#menu a').forEach(a => a.addEventListener('click', () => document.body.classList.remove('menu-open')));
+
+/* ── REVEAL ON SCROLL ── */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+}), {threshold:.12});
+ $$('[data-reveal]').forEach(el => io.observe(el));
+
+/* ── CURSOR CUSTOM + PREVIEW GAMBAR LAYANAN (satu loop rAF) ── */
+const cursor = $('#cursor'), cLbl = cursor.querySelector('span');
+const pv = $('#svc-preview'), pvImg = pv.querySelector('img');
+let tx = innerWidth/2, ty = innerHeight/2, cx = tx, cy = ty, px = tx, py = ty;
+
+addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
+
+document.addEventListener('mouseover', e => {
+  const hit = e.target.closest('a, button, [data-cursor]');
+  const lbl = e.target.closest('[data-cursor]');
+  if (hit){
+    cursor.classList.add('big');
+    cLbl.textContent = lbl ? lbl.dataset.cursor : '';
+  }
+});
+document.addEventListener('mouseout', e => {
+  if (e.target.closest('a, button, [data-cursor]')) cursor.classList.remove('big');
+});
+
+/* hover baris layanan → tampilkan preview gambar */
+ $$('.svc-row').forEach(row => {
+  row.addEventListener('mouseenter', () => {
+    if (!fine) return;
+    pvImg.src = row.dataset.img;
+    pv.classList.add('on');
+  });
+  row.addEventListener('mouseleave', () => pv.classList.remove('on'));
+});
+
+(function loop(){
+  cx += (tx - cx) * .2;  cy += (ty - cy) * .2;
+  cursor.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+  if (fine){
+    px += (tx - px) * .1;  py += (ty - py) * .1;
+    const rot = Math.max(-7, Math.min(7, (tx - px) * .12));
+    pv.style.transform = `translate(${px + 28}px,${py - 170}px) rotate(${rot}deg)`;
+  }
+  requestAnimationFrame(loop);
+})();
+
+/* ── TOAST ── */
+function toast(msg, icon){
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.innerHTML = `<i data-lucide="${icon || 'check'}"></i><span>${msg}</span>`;
+  $('#toasts').appendChild(t);
+  lucide.createIcons();
+  requestAnimationFrame(() => t.classList.add('show'));
+  setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 400); }, 2600);
+}
+
+/* ── SALIN NOMOR WHATSAPP ── */
+ $$('.copy').forEach(b => b.addEventListener('click', async () => {
+  try{
+    await navigator.clipboard.writeText(b.dataset.copy);
+    toast('Nomor disalin: ' + b.dataset.copy, 'copy');
+  }catch{ toast('Gagal menyalin nomor', 'x'); }
+}));
+
+/* ── FORM APPOINTMENT → susun pesan → buka WhatsApp ── */
+(function(){
+  const form = $('#appt-form'), nama = $('#f-nama'), tgl = $('#f-tgl');
+  tgl.min = new Date().toISOString().split('T')[0];
+  tgl.value = tgl.min;
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!nama.value.trim()){
+      nama.classList.add('err'); nama.focus();
+      toast('Isi nama dulu, brother.', 'pen-line');
+      return;
+    }
+    nama.classList.remove('err');
+    const pesan =
+      `Halo Lyte! Saya ${nama.value.trim()}.\n` +
+      `Kebutuhan: ${$('#f-layanan').value}\n` +
+      `Tanggal appointment: ${tgl.value || '(belum ditentukan)'}\n` +
+      ($('#f-pesan').value.trim() ? `Catatan: ${$('#f-pesan').value.trim()}` : '');
+    window.open('https://wa.me/6288988714270?text=' + encodeURIComponent(pesan), '_blank');
+    toast('Membuka WhatsApp…', 'message-circle');
+  });
+})();
+</script>
+</body>
+</html>
